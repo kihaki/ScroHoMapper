@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_calculate_segments"
+        android:title="@string/calculate_segments"
+        android:titleCondensed="@string/calculate_segments"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="80" />
+
+    <item
         android:id="@+id/action_clear_map"
         android:title="@string/clear_map"
         android:titleCondensed="@string/clear_map"

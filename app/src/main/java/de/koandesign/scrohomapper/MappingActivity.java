@@ -21,17 +21,22 @@ public class MappingActivity extends AppCompatActivity {
     @StringRes String snapToGridOff, snapToGridOn;
     @ViewById(R.id.map_draw_view) MapDrawingViewSystem mMapDrawView;
 
+    @OptionsItem(R.id.action_calculate_segments)
+    void calculateSegments(MenuItem item) {
+        
+    }
+
+    @OptionsItem(R.id.action_clear_map)
+    void clearMap(MenuItem item) {
+        mMapDrawView.clearMap();
+    }
+
     @OptionsItem(R.id.action_straight_lines)
     void toggleSnapToGrid(MenuItem item) {
         mMapDrawView.toggleSnapToGrid();
         boolean isSnapToGrid = mMapDrawView.isSnapToGrid();
         item.setTitle(isSnapToGrid ? snapToGridOn : snapToGridOff);
         item.setTitleCondensed(isSnapToGrid ? snapToGridOn : snapToGridOff);
-    }
-
-    @OptionsItem(R.id.action_clear_map)
-    void clearMap(MenuItem item) {
-        mMapDrawView.clearMap();
     }
 
     @AfterViews
