@@ -304,7 +304,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
                                 && distX <= NO_MOVE_THRESHOLD && distY <= NO_MOVE_THRESHOLD) {
                         } else {
                             setSelectedNode(null);
-                            if(newNode == null){
+                            if(newNode == null && closestNode.canTakeMoreConnections()){
                                 // add child node
                                 Log.v("NodeSelect", String.format("Closest node is at %f, %f", closestNode.location.x, closestNode.location.y));
                                 newNode = new PathNode(new PointF(x, y));

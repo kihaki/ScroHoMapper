@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class PathNode {
 
+    private static final int MAX_CONNECTIONS = 2;
     public PointF location;
     public PathNode parent;
     public List<PathNode> childNodes = new ArrayList<>();
@@ -28,5 +29,9 @@ public class PathNode {
 
     public void clearChildren() {
         childNodes.clear();
+    }
+
+    public boolean canTakeMoreConnections() {
+        return childNodes.size() + 1 < MAX_CONNECTIONS;
     }
 }
