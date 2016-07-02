@@ -10,8 +10,8 @@
 
     <item
         android:id="@+id/action_straight_lines"
-        android:title="@string/snap_to_grid_off"
-        android:titleCondensed="@string/snap_to_grid_off"
+        android:title="@string/snap_to_grid_on"
+        android:titleCondensed="@string/snap_to_grid_on"
         app:showAsAction="ifRoom"
         android:orderInCategory="100" />
 </menu>

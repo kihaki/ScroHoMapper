@@ -53,7 +53,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
     private int mOffsetX, mOffsetY;
     private GestureDetectorCompat mDetector;
 
-    private boolean mSnapToGrid;
+    private boolean mSnapToGrid = true;
     private Rect mBounds = new Rect();
 
 
