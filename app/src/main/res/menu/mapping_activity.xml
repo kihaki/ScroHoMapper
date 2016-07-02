@@ -3,8 +3,8 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_straight_lines"
-        android:title="No Snap to Grid"
-        android:titleCondensed="No Snap to Grid"
+        android:title="@string/snap_to_grid_off"
+        android:titleCondensed="@string/snap_to_grid_off"
         app:showAsAction="always"
         android:checkable="true"
         android:checked="false"
