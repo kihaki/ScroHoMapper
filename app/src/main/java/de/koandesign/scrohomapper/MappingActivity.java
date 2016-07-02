@@ -29,6 +29,11 @@ public class MappingActivity extends AppCompatActivity {
         item.setTitleCondensed(isSnapToGrid ? snapToGridOn : snapToGridOff);
     }
 
+    @OptionsItem(R.id.action_clear_map)
+    void clearMap(MenuItem item) {
+        mMapDrawView.clearMap();
+    }
+
     @AfterViews
     protected void setupViews() {
         mMapDrawView.setMapAsset(FLOOR_PLAN);

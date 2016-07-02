@@ -127,4 +127,8 @@ public class MapDrawingViewSystem extends FrameLayout {
     public boolean isSnapToGrid() {
         return mDrawingView.isSnapToGrid();
     }
+
+    public void clearMap() {
+        mDrawingView.clearMap();
+    }
 }

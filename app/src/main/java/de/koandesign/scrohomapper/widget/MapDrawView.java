@@ -136,6 +136,12 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
         invalidate();
     }
 
+    public void clearMap() {
+        mStartNode = null;
+        mPointsTree.clear();
+        invalidate();
+    }
+
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
