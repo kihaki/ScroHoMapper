@@ -245,7 +245,16 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
 
     private void drawPathRecursive(PathNode node, float offsetX, float offsetY, Canvas canvas, Paint paint) {
         mDrawnNodes.put(node, true);
-        canvas.drawCircle(node.location.x + offsetX, node.location.y + offsetY, PATH_NODE_CIRCLE_RADIUS, paint);
+        if(node.childNodes.size() == 0 || node.parent == null) {
+            // Start node or End node
+            canvas.drawRect(
+                    node.location.x - offsetX - PATH_NODE_CIRCLE_RADIUS,
+                    node.location.y - offsetY - PATH_NODE_CIRCLE_RADIUS,
+                    node.location.x + offsetX + PATH_NODE_CIRCLE_RADIUS,
+                    node.location.y + offsetY + PATH_NODE_CIRCLE_RADIUS, paint);
+        } else {
+            canvas.drawCircle(node.location.x + offsetX, node.location.y + offsetY, PATH_NODE_CIRCLE_RADIUS, paint);
+        }
         for (final PathNode child : node.childNodes) {
             canvas.drawLine(node.location.x + offsetX, node.location.y + offsetY, child.location.x + offsetX, child.location.y + offsetY, paint);
             Log.v("DrawNodes", String.format("Child node visited = %b", nodeVisited(node)));
