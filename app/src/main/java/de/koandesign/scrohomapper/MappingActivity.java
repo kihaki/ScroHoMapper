@@ -18,6 +18,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import de.koandesign.scrohomapper.adapter.segmentlist.SegmentListAdapter;
+import de.koandesign.scrohomapper.events.OnClearMapEvent;
 import de.koandesign.scrohomapper.events.OnPathNodeAddedEvent;
 import de.koandesign.scrohomapper.widget.MapDrawingViewSystem;
 
@@ -85,5 +86,10 @@ public class MappingActivity extends AppCompatActivity {
     @Subscribe
     public void onPathNodeAdded(OnPathNodeAddedEvent event) {
         mSegmentsAdapter.addSegment(event.pathNode);
+    }
+
+    @Subscribe
+    public void onClearMapDone(OnClearMapEvent event) {
+        mSegmentsAdapter.clear();
     }
 }

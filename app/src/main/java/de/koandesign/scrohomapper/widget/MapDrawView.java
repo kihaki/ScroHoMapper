@@ -33,6 +33,7 @@ import de.koandesign.scrohomapper.MappingActivity;
 import de.koandesign.scrohomapper.NodeBounds;
 import de.koandesign.scrohomapper.PathNode;
 import de.koandesign.scrohomapper.PointFQuadTree;
+import de.koandesign.scrohomapper.events.OnClearMapEvent;
 import de.koandesign.scrohomapper.events.OnPathNodeAddedEvent;
 
 /**
@@ -147,6 +148,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
         mStartNode = null;
         mPointsTree.clear();
         invalidate();
+        EventBus.getDefault().post(new OnClearMapEvent());
     }
 
     @Override
