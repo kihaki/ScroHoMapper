@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Locale;
 
 import de.koandesign.scrohomapper.MappingActivity;
 import de.koandesign.scrohomapper.NodeBounds;
@@ -115,10 +116,11 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
         mDebugPathPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mDebugPathPaint.setStrokeWidth(2);
 
-        mPathTextPaint.setColor(Color.RED);
+        mPathTextPaint.setColor(Color.WHITE);
         mPathTextPaint.setStyle(Paint.Style.FILL);
         mPathTextPaint.setTextSize(36);
         mPathTextPaint.setTextAlign(Paint.Align.CENTER);
+        mPathTextPaint.setShadowLayer(12.0f, 1.0f, 1.0f, Color.BLACK);
         mPathTextPaint.setAntiAlias(true);
 
         //mDetector = new GestureDetectorCompat(getContext(), this);
@@ -257,11 +259,18 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
         }
         for (final PathNode child : node.childNodes) {
             canvas.drawLine(node.location.x + offsetX, node.location.y + offsetY, child.location.x + offsetX, child.location.y + offsetY, paint);
+            drawSegmentTitle(node, child, offsetX, offsetY, canvas, mPathTextPaint);
             Log.v("DrawNodes", String.format("Child node visited = %b", nodeVisited(node)));
             if(!nodeVisited(child)) {
                 drawPathRecursive(child, offsetX, offsetY, canvas, paint);
             }
         }
+    }
+
+    private void drawSegmentTitle(PathNode node, PathNode child, float offsetX, float offsetY, Canvas canvas, Paint paint) {
+        float pathMidX = node.location.x + offsetX - (node.location.x + offsetX - child.location.x + offsetX) * .5f;
+        float pathMidY = node.location.y + offsetY - (node.location.y + offsetY - child.location.y + offsetY) * .5f;
+        canvas.drawText(String.format(Locale.getDefault(), "%03d", node.segmentNumber), pathMidX, pathMidY, paint);
     }
 
     private boolean nodeVisited(PathNode node) {
@@ -324,7 +333,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
                             if(newNode == null && closestNode.canTakeMoreConnections()){
                                 // add child node
                                 Log.v("NodeSelect", String.format("Closest node is at %f, %f", closestNode.location.x, closestNode.location.y));
-                                newNode = new PathNode(new PointF(x, y), closestNode.segmentNumber++);
+                                newNode = new PathNode(new PointF(x, y), closestNode.segmentNumber + 1);
                                 closestNode.addChild(newNode);
                                 newNode.parent = closestNode;
                             }
@@ -527,7 +536,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
         if(mStartNode == null){
             mStartNode = new PathNode(new PointF(x, y), 1);
         } else {
-            mStartNode.addChild(new PathNode(new PointF(x, y), mStartNode.segmentNumber++));
+            mStartNode.addChild(new PathNode(new PointF(x, y), mStartNode.segmentNumber + 1));
         }
         //mLines.add(new PointF(x + mOffsetX * mZoomFactor, y + mOffsetY * mZoomFactor));
     }
