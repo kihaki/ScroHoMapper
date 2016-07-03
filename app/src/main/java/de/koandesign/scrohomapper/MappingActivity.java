@@ -1,6 +1,9 @@
 package de.koandesign.scrohomapper;
 
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 
 import org.androidannotations.annotations.AfterViews;
@@ -20,10 +23,15 @@ public class MappingActivity extends AppCompatActivity {
 
     @StringRes String snapToGridOff, snapToGridOn;
     @ViewById(R.id.map_draw_view) MapDrawingViewSystem mMapDrawView;
+    @ViewById(R.id.drawer_layout) DrawerLayout mDrawerLayout;
 
     @OptionsItem(R.id.action_calculate_segments)
     void calculateSegments(MenuItem item) {
-        
+        if(mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+            mDrawerLayout.closeDrawer(Gravity.RIGHT);
+        } else {
+            mDrawerLayout.openDrawer(Gravity.RIGHT);
+        }
     }
 
     @OptionsItem(R.id.action_clear_map)
