@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_calculate_segments"
-        android:title="@string/calculate_segments"
-        android:titleCondensed="@string/calculate_segments"
-        app:showAsAction="ifRoom"
-        android:orderInCategory="80" />
 
     <item
         android:id="@+id/action_straight_lines"
         android:title="@string/snap_to_grid_on"
         android:titleCondensed="@string/snap_to_grid_on"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="90" />
+
+    <item
+        android:id="@+id/action_show_segments"
+        android:title="@string/show_segments"
+        android:titleCondensed="@string/show_segments"
         app:showAsAction="ifRoom"
         android:orderInCategory="100" />
 </menu>

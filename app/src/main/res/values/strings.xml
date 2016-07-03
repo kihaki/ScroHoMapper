@@ -5,5 +5,5 @@
     <string name="snap_to_grid_off">Snap to grid: OFF</string>
     <string name="snap_to_grid_on">Snap to grid: ON</string>
     <string name="clear_map">Clear Map</string>
-    <string name="calculate_segments">Calculate Segments</string>
+    <string name="show_segments">Show Segments</string>
 </resources>

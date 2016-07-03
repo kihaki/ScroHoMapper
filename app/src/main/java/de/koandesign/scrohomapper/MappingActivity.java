@@ -40,7 +40,7 @@ public class MappingActivity extends AppCompatActivity {
 
     private EventBus mEventBus = EventBus.getDefault();
 
-    @OptionsItem(R.id.action_calculate_segments)
+    @OptionsItem(R.id.action_show_segments)
     void calculateSegments(MenuItem item) {
         if(mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
             mDrawerLayout.closeDrawer(Gravity.RIGHT);
