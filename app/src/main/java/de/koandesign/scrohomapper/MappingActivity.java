@@ -6,9 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -47,17 +49,17 @@ public class MappingActivity extends AppCompatActivity {
         }
     }
 
-    @OptionsItem(R.id.action_clear_map)
-    void clearMap(MenuItem item) {
-        mMapDrawView.clearMap();
-    }
-
     @OptionsItem(R.id.action_straight_lines)
     void toggleSnapToGrid(MenuItem item) {
         mMapDrawView.toggleSnapToGrid();
         boolean isSnapToGrid = mMapDrawView.isSnapToGrid();
         item.setTitle(isSnapToGrid ? snapToGridOn : snapToGridOff);
         item.setTitleCondensed(isSnapToGrid ? snapToGridOn : snapToGridOff);
+    }
+
+    @Click(R.id.btn_clear_map)
+    void clearMap(Button btn) {
+        mMapDrawView.clearMap();
     }
 
     @AfterViews

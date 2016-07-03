@@ -43,15 +43,21 @@
     </RelativeLayout>
 
     <!-- right drawer -->
-    <FrameLayout
-        android:id="@+id/fl_right_drawer"
+    <LinearLayout
+        android:id="@+id/ll_right_drawer"
         android:layout_width="@dimen/drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="right"
-        android:background="@android:color/background_light">
+        android:background="@android:color/background_light"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_clear_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_map"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_segments_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </FrameLayout>
+    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
