@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -34,6 +35,7 @@ import de.koandesign.scrohomapper.PointFQuadTree;
  * Created by Kolossus on 30.11.15.
  */
 public class MapDrawView extends View implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
+
     private static final float PATH_NODE_CIRCLE_RADIUS = 12;
     private static final int POINT_CLOSENESS_THRESHOLD = 100;
     private static final float NO_MOVE_THRESHOLD = 25;
@@ -313,7 +315,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
                             if(newNode == null && closestNode.canTakeMoreConnections()){
                                 // add child node
                                 Log.v("NodeSelect", String.format("Closest node is at %f, %f", closestNode.location.x, closestNode.location.y));
-                                newNode = new PathNode(new PointF(x, y));
+                                newNode = new PathNode(new PointF(x, y), closestNode.segmentNumber++);
                                 closestNode.addChild(newNode);
                                 newNode.parent = closestNode;
                             }
@@ -358,7 +360,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
                             if (mStartNode == null) {
                                 // Add start node
                                 mStartNode = new PathNode(
-                                        new PointF(x, y));
+                                        new PointF(x, y), 1);
                                 mPointsTree.add(mStartNode);
                                 invalidate();
                             }
@@ -414,6 +416,15 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
             }
         }
         return true;
+    }
+
+    private int findCharPos(char c, char[] chars) {
+        for (int i = 0; i < chars.length; i++) {
+            if(chars[i] == c) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private void setSelectedNode(PathNode selected) {
@@ -505,9 +516,9 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
 
     private void addLinePoint(float x, float y) {
         if(mStartNode == null){
-            mStartNode = new PathNode(new PointF(x, y));
+            mStartNode = new PathNode(new PointF(x, y), 1);
         } else {
-            mStartNode.addChild(new PathNode(new PointF(x, y)));
+            mStartNode.addChild(new PathNode(new PointF(x, y), mStartNode.segmentNumber++));
         }
         //mLines.add(new PointF(x + mOffsetX * mZoomFactor, y + mOffsetY * mZoomFactor));
     }

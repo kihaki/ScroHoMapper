@@ -13,10 +13,12 @@ public class PathNode {
     private static final int MAX_CONNECTIONS = 2;
     public PointF location;
     public PathNode parent;
+    public int segmentNumber;
     public List<PathNode> childNodes = new ArrayList<>();
 
-    public PathNode(PointF point){
+    public PathNode(PointF point, int pathNumber){
         location = point;
+        segmentNumber = pathNumber;
     }
 
     public void addChild(PathNode child){
