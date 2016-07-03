@@ -3,6 +3,13 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_toggle_binary_tree_drawing"
+        android:title="@string/show_binary_tree_off"
+        android:titleCondensed="@string/show_binary_tree_off"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="80" />
+
+    <item
         android:id="@+id/action_straight_lines"
         android:title="@string/snap_to_grid_on"
         android:titleCondensed="@string/snap_to_grid_on"

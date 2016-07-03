@@ -128,6 +128,14 @@ public class MapDrawingViewSystem extends FrameLayout {
         return mDrawingView.isSnapToGrid();
     }
 
+    public void toggleBinaryTreeDrawing() {
+        mDrawingView.toggleBinaryTreeDrawing();
+    }
+
+    public boolean isBinaryTreeDrawingEnabled() {
+        return mDrawingView.isBinaryTreeDrawingEnabled();
+    }
+
     public void clearMap() {
         mDrawingView.clearMap();
     }

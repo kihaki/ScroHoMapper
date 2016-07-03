@@ -4,6 +4,8 @@
     <!-- menu -->
     <string name="snap_to_grid_off">Snap to grid: OFF</string>
     <string name="snap_to_grid_on">Snap to grid: ON</string>
+    <string name="show_binary_tree_off">Show Binary Tree: OFF</string>
+    <string name="show_binary_tree_on">Show Binary Tree: ON</string>
     <string name="show_segments">Show Segments</string>
     <string name="hide_segments">Hide Segments</string>
     <string name="clear_map">Clear Map</string>

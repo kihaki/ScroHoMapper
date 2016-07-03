@@ -74,6 +74,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
     private PathNode mStartNode;
     private HashMap<PathNode, Boolean> mDrawnNodes = new HashMap<>();
     private PathNode mSelectedNode;
+    private boolean mDrawBinaryTreeEnabled;
 
     public MapDrawView(Context context) {
         super(context);
@@ -193,7 +194,9 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
 
         drawSelectedNode(c, mSelectedPaint);
 
-        drawRecursiveBounds(mPointsTree, c, mDebugPathPaint);
+        if(mDrawBinaryTreeEnabled) {
+            drawRecursiveBounds(mPointsTree, c, mDebugPathPaint);
+        }
 
         // Draw path
         /*for (int i = 0; i < mLines.size(); i++) {
@@ -654,6 +657,15 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
 
     public boolean isSnapToGrid() {
         return mSnapToGrid;
+    }
+
+    public void toggleBinaryTreeDrawing() {
+        mDrawBinaryTreeEnabled = !mDrawBinaryTreeEnabled;
+        invalidate();
+    }
+
+    public boolean isBinaryTreeDrawingEnabled() {
+        return mDrawBinaryTreeEnabled;
     }
 
     public void setMapAsset(String fileName) {

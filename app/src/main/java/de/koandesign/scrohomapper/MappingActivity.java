@@ -32,6 +32,7 @@ public class MappingActivity extends AppCompatActivity {
 
     private static final String FLOOR_PLAN = "floor2half.png";
 
+    @StringRes String showBinaryTreeOff, showBinaryTreeOn;
     @StringRes String snapToGridOff, snapToGridOn;
     @StringRes String showSegments, hideSegments;
 
@@ -44,6 +45,22 @@ public class MappingActivity extends AppCompatActivity {
 
     private EventBus mEventBus = EventBus.getDefault();
 
+    @OptionsItem(R.id.action_toggle_binary_tree_drawing)
+    void toggleBinaryTreeDrawing(MenuItem item) {
+        mMapDrawView.toggleBinaryTreeDrawing();
+        boolean isBinaryTreeDrawingEnabled = mMapDrawView.isBinaryTreeDrawingEnabled();
+        item.setTitle(isBinaryTreeDrawingEnabled ? showBinaryTreeOn : showBinaryTreeOff);
+        item.setTitleCondensed(isBinaryTreeDrawingEnabled ? showBinaryTreeOn : showBinaryTreeOff);
+    }
+
+    @OptionsItem(R.id.action_straight_lines)
+    void toggleSnapToGrid(MenuItem item) {
+        mMapDrawView.toggleSnapToGrid();
+        boolean isSnapToGrid = mMapDrawView.isSnapToGrid();
+        item.setTitle(isSnapToGrid ? snapToGridOn : snapToGridOff);
+        item.setTitleCondensed(isSnapToGrid ? snapToGridOn : snapToGridOff);
+    }
+
     @OptionsItem(R.id.action_show_segments)
     void showSegments(MenuItem item) {
         if(mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
@@ -55,14 +72,6 @@ public class MappingActivity extends AppCompatActivity {
             item.setTitle(hideSegments);
             item.setTitleCondensed(hideSegments);
         }
-    }
-
-    @OptionsItem(R.id.action_straight_lines)
-    void toggleSnapToGrid(MenuItem item) {
-        mMapDrawView.toggleSnapToGrid();
-        boolean isSnapToGrid = mMapDrawView.isSnapToGrid();
-        item.setTitle(isSnapToGrid ? snapToGridOn : snapToGridOff);
-        item.setTitleCondensed(isSnapToGrid ? snapToGridOn : snapToGridOff);
     }
 
     @Click(R.id.btn_clear_map)
