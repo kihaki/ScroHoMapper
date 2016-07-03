@@ -33,6 +33,7 @@ public class MappingActivity extends AppCompatActivity {
     private static final String FLOOR_PLAN = "floor2half.png";
 
     @StringRes String snapToGridOff, snapToGridOn;
+    @StringRes String showSegments, hideSegments;
 
     @ViewById(R.id.map_draw_view) MapDrawingViewSystem mMapDrawView;
     @ViewById(R.id.drawer_layout) NonBlockingDrawerLayout mDrawerLayout;
@@ -47,8 +48,12 @@ public class MappingActivity extends AppCompatActivity {
     void showSegments(MenuItem item) {
         if(mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
             mDrawerLayout.closeDrawer(Gravity.RIGHT);
+            item.setTitle(showSegments);
+            item.setTitleCondensed(showSegments);
         } else {
             mDrawerLayout.openDrawer(Gravity.RIGHT);
+            item.setTitle(hideSegments);
+            item.setTitleCondensed(hideSegments);
         }
     }
 

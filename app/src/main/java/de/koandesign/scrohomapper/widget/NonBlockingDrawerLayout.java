@@ -33,6 +33,10 @@ public class NonBlockingDrawerLayout extends DrawerLayout {
                 return false;
             }
         }
+        if (event.getActionMasked() == MotionEvent.ACTION_MOVE) {
+            // Ignore dragging stuff into the drawer
+            return false;
+        }
         return super.onInterceptTouchEvent(event);
     }
 }
