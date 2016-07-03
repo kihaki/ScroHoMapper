@@ -1,18 +1,24 @@
 package de.koandesign.scrohomapper;
 
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.MenuItem;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
+import de.koandesign.scrohomapper.adapter.segmentlist.SegmentListAdapter;
+import de.koandesign.scrohomapper.events.OnPathNodeAddedEvent;
 import de.koandesign.scrohomapper.widget.MapDrawingViewSystem;
 
 @EActivity(R.layout.activity_mapping)
@@ -22,8 +28,14 @@ public class MappingActivity extends AppCompatActivity {
     private static final String FLOOR_PLAN = "floor2half.png";
 
     @StringRes String snapToGridOff, snapToGridOn;
+
     @ViewById(R.id.map_draw_view) MapDrawingViewSystem mMapDrawView;
     @ViewById(R.id.drawer_layout) DrawerLayout mDrawerLayout;
+    @ViewById(R.id.rv_segments_list) RecyclerView mSegmentsRecycler;
+
+    @Bean SegmentListAdapter mSegmentsAdapter;
+
+    private EventBus mEventBus = EventBus.getDefault();
 
     @OptionsItem(R.id.action_calculate_segments)
     void calculateSegments(MenuItem item) {
@@ -49,7 +61,29 @@ public class MappingActivity extends AppCompatActivity {
 
     @AfterViews
     protected void setupViews() {
+        // Floorplan
         mMapDrawView.setMapAsset(FLOOR_PLAN);
         mMapDrawView.setDownsamplingFactor(1);
+
+        // Segments Recycler
+        mSegmentsRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mSegmentsRecycler.setAdapter(mSegmentsAdapter);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mEventBus.register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mEventBus.unregister(this);
+    }
+
+    @Subscribe
+    public void onPathNodeAdded(OnPathNodeAddedEvent event) {
+        mSegmentsAdapter.addSegment(event.pathNode);
     }
 }

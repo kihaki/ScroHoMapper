@@ -20,6 +20,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import de.koandesign.scrohomapper.MappingActivity;
 import de.koandesign.scrohomapper.NodeBounds;
 import de.koandesign.scrohomapper.PathNode;
 import de.koandesign.scrohomapper.PointFQuadTree;
+import de.koandesign.scrohomapper.events.OnPathNodeAddedEvent;
 
 /**
  * Created by Kolossus on 30.11.15.
@@ -380,6 +383,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
                                 mStartNode = new PathNode(
                                         new PointF(x, y), 1);
                                 mPointsTree.add(mStartNode);
+                                EventBus.getDefault().post(new OnPathNodeAddedEvent(mStartNode));
                                 invalidate();
                             }
                         } else {
@@ -394,6 +398,7 @@ public class MapDrawView extends View implements GestureDetector.OnGestureListen
                                     mPointsTree.add(newNode);
                                 }
                             }
+                            EventBus.getDefault().post(new OnPathNodeAddedEvent(newNode));
                             invalidate();
                         }
                     }

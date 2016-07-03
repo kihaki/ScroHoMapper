@@ -41,8 +41,11 @@ dependencies {
     def supportLibrary = '24.0.0'
     compile "com.android.support:appcompat-v7:$supportLibrary"
     compile "com.android.support:cardview-v7:$supportLibrary"
+    compile "com.android.support:recyclerview-v7:$supportLibrary"
 
     def androidAnnotations = '4.0.0'
     apt "org.androidannotations:androidannotations:$androidAnnotations"
     compile "org.androidannotations:androidannotations-api:$androidAnnotations"
+
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
